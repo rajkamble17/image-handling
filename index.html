@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery with jQuery</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <style>
+  .gallery {
+    margin-bottom: 30px;
+    display: none;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .desc {
+    text-align: center;
+    padding-top: 12px;
+    font-size: 1.1em;
+    font-family: 'Arial', sans-serif;
+    color: #555;
+  }
+
+  .desc:hover {
+    color: #007bff;
+  }
+
+  #filter-buttons button {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #filter-buttons button:hover {
+    background-color: #138496;
+  }
+
+  #filter-buttons button:active {
+    transform: scale(0.98);
+  }
+</style>
+
+</head>
+<body>
+  <div class="container my-4">
+    <div class="text-center mb-4" id="filter-buttons">
+      <button class="btn btn-primary mx-1" data-filter="all">All</button>
+      <button class="btn btn-primary mx-1" data-filter="mountain">Mountains</button>
+      <button class="btn btn-primary mx-1" data-filter="forest">Forest</button>
+      <button class="btn btn-primary mx-1" data-filter="flower">Flower</button>
+    </div>
+
+    <div class="row" id="gallery-container">
+      <div class="col-md-4 gallery" data-category="mountain">
+        <a target="_blank" href="https://tse3.mm.bing.net/th?id=OIP.zg6W_4qdBqPw9EKW_D1X-gHaE8&pid=Api&P=0&h=180">
+          <img src="https://tse3.mm.bing.net/th?id=OIP.zg6W_4qdBqPw9EKW_D1X-gHaE8&pid=Api&P=0&h=180" alt="Mountains">
+        </a>
+        <div class="desc">A beautiful mountain view</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="forest">
+        <a target="_blank" href="http://wallpapercave.com/wp/GD9rMAh.jpg">
+          <img src="http://wallpapercave.com/wp/GD9rMAh.jpg" alt="Forest">
+        </a>
+        <div class="desc">A lush forests</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="forest">
+        <a target="_blank" href="https://static.vecteezy.com/system/resources/previews/029/771/613/non_2x/epicgraphy-shot-of-rainy-season-background-enjoying-nature-rainfall-and-happy-life-concept-generative-ai-free-photo.jpeg">
+          <img src="https://static.vecteezy.com/system/resources/previews/029/771/613/non_2x/epicgraphy-shot-of-rainy-season-background-enjoying-nature-rainfall-and-happy-life-concept-generative-ai-free-photo.jpeg" alt="Downpour" width="600" height="400">
+        </a>
+        <div class="desc">Embracing the joy of the rainy season — nature refreshed, spirits uplifted.</div>
+      </div>
+      
+      <div class="col-md-4 gallery" data-category="forest">
+          <a target="_blank" href="https://i.pinimg.com/736x/f0/94/43/f09443212449b9d7d672c8e0d9fa6bd1.jpg">
+            <img src="https://i.pinimg.com/736x/f0/94/43/f09443212449b9d7d672c8e0d9fa6bd1.jpg" alt="Northern Lights" width="600" height="400">
+          </a>
+          <div class="desc">Golden hour magic.</div>
+        </div>
+
+      <div class="col-md-4 gallery" data-category="animal">
+        <a target="_blank" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDVH3y1T7M4LfTs4h--9DV30L4FJ_GzsAD5Q&s">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDVH3y1T7M4LfTs4h--9DV30L4FJ_GzsAD5Q&s" alt="Elephant">
+        </a>
+        <div class="desc">Big heart, big ears, big love.</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="animal">
+        <a target="_blank" href="https://wallup.net/wp-content/uploads/2016/01/202352-animals-macaws-nature-closeup-birds-parrot.jpg">
+          <img src="https://wallup.net/wp-content/uploads/2016/01/202352-animals-macaws-nature-closeup-birds-parrot.jpg" alt="Parrot" width="600" height="400">
+        </a>
+        <div class="desc">A parrot that speaks is a sign of a happy parrot.</div>
+      </div>
+    
+      <div class="col-md-4 gallery" data-category="animal">
+        <a target="_blank" href="https://c4.wallpaperflare.com/wallpaper/568/325/259/wild-baby-fawn-white-spotted-deer-wallpaper-preview.jpg">
+          <img src="https://c4.wallpaperflare.com/wallpaper/568/325/259/wild-baby-fawn-white-spotted-deer-wallpaper-preview.jpg" alt="Deer" width="600" height="400">
+        </a>
+        <div class="desc">Witnessing the grace of India's wild deer.</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="flower">
+        <a target="_blank" href="https://cms.interiorcompany.com/wp-content/uploads/2024/01/red-velvet-types-of-red-roses.jpg">
+          <img src="https://cms.interiorcompany.com/wp-content/uploads/2024/01/red-velvet-types-of-red-roses.jpg" alt="Red Rose">
+        </a>
+        <div class="desc">Red roses ignite the soul.</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="flower">
+        <a target="_blank" href="https://wallpapercave.com/wp/wp4579279.jpg">
+          <img src="https://wallpapercave.com/wp/wp4579279.jpg" alt="Tulips" width="600" height="400">
+        </a>
+        <div class="desc">Tulips: nature's way of smiling.</div>
+      </div>
+    
+      <div class="col-md-4 gallery" data-category="flower">
+        <a target="_blank" href="https://www.almanac.com/sites/default/files/users/Robin%20Sweetser/flowers-100134_1280.jpg">
+          <img src="https://www.almanac.com/sites/default/files/users/Robin%20Sweetser/flowers-100134_1280.jpg" alt="Crocuses" width="600" height="400">
+        </a>
+        <div class="desc">A small yellow, purple or white flower that grows in early spring</div>
+      </div>
+    
+      <div class="col-md-4 gallery" data-category="flower">
+        <a target="_blank" href="https://assets-news.housing.com/news/wp-content/uploads/2022/10/25151915/National-flower-of-India.png">
+          <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/10/25151915/National-flower-of-India.png" alt="Lotus" width="600" height="400">
+        </a>
+        <div class="desc">The lotus is a reminder that even in the darkest mud, beauty can emerge.</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="bird">
+        <a target="_blank" href="https://www.kidpid.com/wp-content/uploads/2021/08/why-are-peacocks-such-show-offs.jpg">
+          <img src="https://www.kidpid.com/wp-content/uploads/2021/08/why-are-peacocks-such-show-offs.jpg" alt="Peacock">
+        </a>
+        <div class="desc">Elegance is timeless, like a peacock's grace.</div>
+      </div>
+
+      <div class="col-md-4 gallery" data-category="bird">
+        <a target="_blank" href="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQzOJNpA-8Tx0HGcgXWzp-AtKbFJck9R85TFVfqbYDZvqMwD3G6aVs5LAZ4N43BLxD9z5pkEsIoOhlJbNsBsQo7hg">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQzOJNpA-8Tx0HGcgXWzp-AtKbFJck9R85TFVfqbYDZvqMwD3G6aVs5LAZ4N43BLxD9z5pkEsIoOhlJbNsBsQo7hg" alt="Scarlet macaw" width="600" height="400">
+        </a>
+        <div class="desc">Its strong, hooked beak is perfect for breaking nuts and seeds. Interestingly, the scarlet macaw can eat fruits toxic enough to kill other animals.</div>
+      </div>
+    
+      <div class="col-md-4 gallery" data-category="bird">
+        <a target="_blank" href="https://www.allaboutbirds.org/guide/assets/photo/305880301-1280px.jpg">
+          <img src="https://www.allaboutbirds.org/guide/assets/photo/305880301-1280px.jpg" alt="Sparrow" width="600" height="400">
+        </a>
+        <div class="desc">Freedom in flight, A symbol of hope, The sparrow's quiet beauty, Nature's little dancer, and A moment of peace.</div>
+      </div>    
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    $(".gallery").each(function (index) {
+      $(this).delay(200 * index).fadeIn(600);
+    });
+
+    $("#filter-buttons button").on("click", function () {
+      const selected = $(this).data("filter");
+
+      $(".gallery").slideUp(300);
+
+      setTimeout(() => {
+        $(".gallery").each(function () {
+          const category = $(this).data("category");
+          if (selected === "all" || selected === category) {
+            $(this).stop(true, true).fadeIn(600);
+          }
+        });
+      }, 300);
+    });
+  });
+</script>
+</body>
+</html>
